@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>SendEmail</title>
+</head>
+<body>
+    <p><a href="/">Back to home</a></p>
+    <!--replace-->
+    <form method="post">
+        <label>To: </label>
+        <input name="email" type="email" autocomplete="off" />
+        <br />
+        <label>Subject: </label>
+        <input name="subject" type="text" autocomplete="off" />
+        <br />
+        <label>Message: </label>
+        <textarea name="textToSend" maxlength="100" rows="10" cols="30"></textarea>
+        <br />
+        <input type="submit" value="Send" />
+    </form>
+</body>
+</html>

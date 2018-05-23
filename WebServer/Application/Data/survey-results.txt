@@ -1,0 +1,1 @@
+﻿FirstName: Dakata, LastName: dsadsa, Birthday: 2016-12-01, Gender: male, Status: Student, Recommendations: xaxa, Own: [Laptop, Smart Phone]

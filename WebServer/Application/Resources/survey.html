@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Survey</title>
+</head>
+<body>
+    <h1>Survey</h1>
+    <form method="post">
+        <label>First Name</label>
+        <input name="firstName" type="text" placeholder="First Name" autocomplete="off" />
+        <br />
+        <label>Last Name</label>
+        <input name="lastName" type="text" placeholder="Last Name" autocomplete="off" />
+        <br />
+        <label>Birthdate</label>
+        <input name="birthday" type="date" placeholder="mm/dd/yyyy">
+        <br />
+        <label>Gender</label>
+        <input type="radio" name="gender" value="male"> Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+        <input type="radio" name="gender" value="other"> Gender<br />
+        <label>Status</label>
+        <select name="status">
+            <option name="student" value="Student">Student</option>
+            <option name="partTimeEmployee" value="Part-Time Employee">Part-time Employee</option>
+            <option name="fullTimeEmployee" value="Full-Time Employee">Full-time Employee</option>
+            <option name="unemployed" value="Unemployed">Unemployed</option>
+            <option name="noanswer" value="Noanswer">Do not want to answer</option>
+        </select>
+        <br />
+        <label>Recommenations</label>
+        <textarea name="recommendations" rows="10" cols="30" placeholder="Please tell us what are your recommendations for us and how to improve our product."></textarea>
+        <br />
+        <label>You own:</label>
+        <input type="checkbox" name="laptop" value="Laptop">Laptop
+        <input type="checkbox" name="smartPhone" value="Smart Phone">Smart Phone
+        <input type="checkbox" name="mobilePhone" value="Mobile Phone">Mobile Phone
+        <input type="checkbox" name="car" value="Car">Car
+        <input type="checkbox" name="bike" value="Bike">Bike
+        <br />
+        <button type="reset" value="Reset">Reset all fields</button>
+        <button type="submit" value="Submit">Send Survey</button>
+    </form>
+    <!--replace-->
+</body>
+</html>
