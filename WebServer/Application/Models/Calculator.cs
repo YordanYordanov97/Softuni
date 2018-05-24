@@ -4,9 +4,9 @@ using System.Text;
 
 namespace WebServer.Application.Models
 {
-    public static class Calculator
+    public class Calculator
     {
-        public static string CalculateNumbers(double numberOne,string mathSign,double numberTwo)
+        public string CalculateNumbers(double numberOne,string mathSign,double numberTwo)
         {
             var resultString = string.Empty;
             var result = 0.00D;

@@ -9,36 +9,49 @@
     using WebServer.Application.Views.Home;
     using WebServer.Server.HTTP;
 
-    public class HomeController
+    public class HomeController: Controller
     {
         public IHttpResponse Index(IHttpRequest req)
         {
-            var response = new ViewResponse(HttpStatusCode.Ok, new IndexView());
+            var response = new ViewResponse(HttpStatusCode.Ok, new HtmlView(@"index",this.ViewData));
 
             return response;
         }
 
         public IHttpResponse AboutUs()
         {
-            var response = new ViewResponse(HttpStatusCode.Ok, new AboutUsView());
+            var response = new ViewResponse(HttpStatusCode.Ok, new HtmlView(@"about", this.ViewData));
 
             return response;
         }
         
         public IHttpResponse Calculate(IHttpRequest req)
         {
-            var numberOne = 0.00D;
-            var numberTwo = 0.00D;
-            var matSign = string.Empty;
+            var numberOne = string.Empty;
+            var mathSign = string.Empty;
+            var numberTwo = string.Empty;
+            var result = string.Empty;
 
-            if (req.FormData.Count > 0)
+            if (req.FormData.ContainsKey("numberOne") && req.FormData.ContainsKey("mathSign")
+                && req.FormData.ContainsKey("numberTwo"))
             {
-                numberOne = double.Parse(req.FormData["numberOne"]);
-                numberTwo = double.Parse(req.FormData["numberTwo"]);
-                matSign = req.FormData["mathSign"];
+                numberOne = req.FormData["numberOne"];
+                mathSign = req.FormData["mathSign"];
+                numberTwo = req.FormData["numberTwo"];
+
+                var calculator = new Calculator();
+                result = calculator.CalculateNumbers(double.Parse(numberOne), mathSign, double.Parse(numberTwo));
             }
 
-            return new ViewResponse(HttpStatusCode.Ok, new CalculatorView(numberOne, matSign, numberTwo));
+            this.ViewData["<!--replaceNumberOne-->"] = $"<input name = \"numberOne\" type = \"number\" value=\"{numberOne}\" " +
+                $"placeholder=\"Enter Number\" step = \"0.25\" autocomplete = \"off\" />";
+            this.ViewData["<!--replaceMathSign-->"] = $"<input name = \"mathSign\" type = \"text\" value=\"{mathSign}\" " +
+                $"placeholder=\"Math Sign\" autocomplete = \"off\" />";
+            this.ViewData["<!--replaceNumberTwo-->"] = $"<input name = \"numberTwo\" type = \"number\" value=\"{numberTwo}\" " +
+                $"placeholder=\"Enter Number\" step = \"0.25\" autocomplete = \"off\" />";
+            this.ViewData[" <!--replaceResult-->"] = result;
+
+            return new ViewResponse(HttpStatusCode.Ok, new HtmlView(@"calculator", this.ViewData));
         }
 
         public IHttpResponse LogInAdmin(IHttpRequest req, string method)

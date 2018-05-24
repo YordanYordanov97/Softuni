@@ -108,7 +108,7 @@
               "/survey",
               req => new UserController().UserInformationPost(req));
 
-            appRouteConfig.Get(
+            appRouteConfig.Post(
                "/logout",
                req => new AccountController().LogOut(req));
         }

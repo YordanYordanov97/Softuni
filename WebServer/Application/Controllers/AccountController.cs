@@ -1,17 +1,19 @@
 ﻿namespace WebServer.Application.Controllers
 {
     using WebServer.Application.Models;
-    using WebServer.Application.Views.Account;
+    using WebServer.Application.Views;
     using WebServer.Server.Enums;
     using WebServer.Server.Http.Contracts;
     using WebServer.Server.Http.Response;
     using WebServer.Server.HTTP;
 
-    public class AccountController
+    public class AccountController:Controller
     {
         public IHttpResponse UserLogInGet()
         {
-            return new ViewResponse(HttpStatusCode.Ok, new LoginUserView(string.Empty));
+            this.ViewData["<!--unsuccessfulLogin-->"] = string.Empty;
+
+            return new ViewResponse(HttpStatusCode.Ok, new HtmlView("login",this.ViewData));
         }
 
         public IHttpResponse UserLogInPost(IHttpRequest req)
@@ -26,8 +28,9 @@
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                var invalidMessage = "<div style=\"color:red\">Username and Password are required</div>";
-                return new ViewResponse(HttpStatusCode.Ok, new LoginUserView(invalidMessage));
+                this.ViewData["<!--unsuccessfulLogin-->"] = "<div style=\"color:red\">Username and Password are required</div>";
+
+                return new ViewResponse(HttpStatusCode.Ok, new HtmlView("login", this.ViewData));
             }
             else
             {
@@ -44,7 +47,7 @@
         public IHttpResponse LogOut(IHttpRequest req)
         {
             req.Session.Clear();
-            return new RedirectResponse($"/");
+            return new RedirectResponse($"/login");
         }
     }
 }

@@ -58,14 +58,21 @@ namespace WebServer.Application.Models
         {
             var sb = new StringBuilder();
 
-            foreach(var product in this.Products)
+            if (this.Products.Count == 0)
             {
-                var deleteForm = $"<form method=\"post\">" +
-                        $"<p>{product}</p>" +
-                        $"<input name=\"deleteCake\" value=\"{product}\"type=\"hidden\"  />" +
-                    "<input type=\"submit\" value=\"Remove\" />" +
-                    "</form>";
-                sb.AppendLine($"{deleteForm}");
+                sb.AppendLine("<div>No items in your cart</div>");
+            }
+            else
+            {
+                foreach (var product in this.Products)
+                {
+                    var deleteForm = $"<form method=\"post\">" +
+                            $"<p>{product}</p>" +
+                            $"<input name=\"deleteCake\" value=\"{product}\"type=\"hidden\"  />" +
+                        "<input type=\"submit\" value=\"Remove\" />" +
+                        "</form>";
+                    sb.AppendLine($"{deleteForm}");
+                }
             }
 
             return sb.ToString().Trim();

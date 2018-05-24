@@ -1,22 +1,24 @@
 ﻿namespace WebServer.Application.Controllers
 {
-    using System.Text;
     using WebServer.Application.Models;
-    using WebServer.Application.Views.ShoppingCart;
+    using WebServer.Application.Views;
     using WebServer.Server.Enums;
     using WebServer.Server.Http.Contracts;
     using WebServer.Server.Http.Response;
     using WebServer.Server.HTTP;
 
-    public class CartController
+    public class CartController:Controller
     {
         public IHttpResponse CartGet(IHttpRequest req)
         {
             var cart = req.Session.Get<Cart>(SessionStore.CurrentCartKey);
             var cartProducts = cart.GetAllProductsAsHtml();
             var cartTotalPrice = cart.CalculateTotalCostPrice();
-            
-            return new ViewResponse(HttpStatusCode.Ok, new CartView(cartProducts, cartTotalPrice));
+
+            this.ViewData["<!--Products-->"] = cartProducts;
+            this.ViewData[" <!--TotalCost-->"] = cartTotalPrice;
+
+            return new ViewResponse(HttpStatusCode.Ok, new HtmlView("cart", this.ViewData));
         }
 
         public IHttpResponse CartPost(IHttpRequest req)
@@ -28,12 +30,14 @@
                 var cakeToRemove = req.FormData["deleteCake"];
                 
                 cart.Remove(cakeToRemove);
-                req.Session.Add(SessionStore.CurrentCartKey, cart);
-
+                
                 var cartProducts = cart.GetAllProductsAsHtml();
                 var cartTotalPrice = cart.CalculateTotalCostPrice();
 
-                return new ViewResponse(HttpStatusCode.Ok, new CartView(cartProducts, cartTotalPrice));
+                this.ViewData["<!--Products-->"] = cartProducts;
+                this.ViewData[" <!--TotalCost-->"] = cartTotalPrice;
+
+                return new ViewResponse(HttpStatusCode.Ok, new HtmlView("cart", this.ViewData));
             }
 
             return new RedirectResponse($"/successorder");
@@ -41,10 +45,9 @@
 
         public IHttpResponse SuccessOrder(IHttpRequest req)
         {
-            var cart = req.Session.Get<Cart>(SessionStore.CurrentCartKey);
-            cart.Clear();
-            req.Session.Add(SessionStore.CurrentCartKey, cart);
-            return new ViewResponse(HttpStatusCode.Ok, new SuccessOrderView());
+            req.Session.Get<Cart>(SessionStore.CurrentCartKey).Clear();
+
+            return new ViewResponse(HttpStatusCode.Ok, new HtmlView("successorder", this.ViewData));
         }
     }
 }

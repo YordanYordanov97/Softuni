@@ -2,14 +2,15 @@
 {
     using System.IO;
     using System.Text;
+    using WebServer.Application.Helpers;
     using WebServer.Application.Models;
-    using WebServer.Application.Views.Cakes;
+    using WebServer.Application.Views;
     using WebServer.Server.Enums;
     using WebServer.Server.Http.Contracts;
     using WebServer.Server.Http.Response;
     using WebServer.Server.HTTP;
 
-    public class CakeController
+    public class CakeController:Controller
     {
         private Cart cart;
 
@@ -20,7 +21,8 @@
 
         public IHttpResponse AddGet()
         {
-            return new ViewResponse(HttpStatusCode.Ok, new AddCakeView(string.Empty));
+            this.ViewData["<!--replaceCakes-->"] = string.Empty;
+            return new ViewResponse(HttpStatusCode.Ok, new HtmlView("addcake",this.ViewData));
         }
 
         public IHttpResponse AddPost(string name, double price)
@@ -28,10 +30,10 @@
             var cake = new Cake();
             cake.AddCakeInFile(name, price);
 
-            string cakesHtml = $"<div>name: {name}</div>" +
+            this.ViewData["<!--replaceCakes-->"]= $"<div>name: {name}</div>" +
                                $"<div>price: {price:f2}</div>";
 
-            return new ViewResponse(HttpStatusCode.Ok, new AddCakeView(cakesHtml));
+            return new ViewResponse(HttpStatusCode.Ok, new HtmlView("addcake", this.ViewData));
         }
 
         public IHttpResponse Search(IHttpRequest req)
@@ -46,9 +48,7 @@
                 searchedCakeName = req.UrlParameters["name"];
                 formValue = searchedCakeName;
 
-                var currentDirectory = Directory.GetCurrentDirectory();
-                string newPath = Path.GetFullPath(Path.Combine(currentDirectory, @"..\..\..\"));
-                var fileLines = File.ReadAllLines(newPath + @".\Application\Data\database.csv");
+                var fileLines = GetFileFromDirectory.GetFileLinesByCurrentName("database", "csv");
 
                 foreach (var line in fileLines)
                 {
@@ -78,11 +78,26 @@
                     
                     cart.AddProduct(orderCakeId);
                     productsCount = cart.GetProductsCount();
-                    req.Session.Add(SessionStore.CurrentCartKey, cart);
                 }
             }
+
+            var productCountAsSting = string.Empty;
+            if (productsCount > 1)
+            {
+                productCountAsSting = $"<p><a href=\"/cart\">Your Cart:</a> {productsCount} products</p>";
+            }
+            else if (productsCount == 1)
+            {
+                productCountAsSting = $"<p><a href=\"/cart\">Your Cart:</a> {productsCount} product</p>";
+            }
+
+            var form = $"<input name=\"name\" type=\"text\" placeholder=\"Enter Cake name\" value=\"{formValue}\" />";
+
+            this.ViewData["<!--form-->"] = form;
+            this.ViewData["<!--productCount-->"] = productCountAsSting;
+            this.ViewData["<!--searchedCakes-->"] = sb.ToString().Trim();
             
-            return new ViewResponse(HttpStatusCode.Ok, new SearchView(sb.ToString().Trim(), productsCount, formValue));
+            return new ViewResponse(HttpStatusCode.Ok, new HtmlView("search", this.ViewData));
         }
     }
 }
