@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+</head>
+<body>
+    <!--Nav-->
+    <div class="container-fluid">
+        <center>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{{Title}}}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <iframe width="560" height="315" frameborder="0" {{{videoUrl}}} allowfullscreen></iframe>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12" style="word-wrap: break-word">
+                    <p>{{{Description}}}</p>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <p><strong>Price</strong> - {{{Price}}}&euro;</p>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <p><strong>Size</strong> - {{{Size}}} GB</p>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <p><strong>Release Date</strong> - {{{Date}}}</p>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/store" style="display:inline">
+                        <button class="btn btn-outline-info" type="submit">Back</button>
+                    </form>
+                    <!--AdminButtons-->
+                    <form method="post" style="display:inline">
+                        <input name="gameId" {{{GameId}}} type ="hidden" />
+                        <button class="btn btn-primary" {{{value}}} type="submit">Buy</button>
+                    </form>
+                </div>
+            </div>
+        </center>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+</body>
+</html>
