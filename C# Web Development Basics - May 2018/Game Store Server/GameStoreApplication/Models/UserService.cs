@@ -79,16 +79,21 @@ namespace WebServer.GameStoreApplication.Models
         {
             using (var db = new GameStoreDbContext())
             {
-                var user = db.Users.SingleOrDefault(x => x.Email == userEmail);
-                var userId = user.Id;
-
-                var userGames = db.UserGames.Where(x => x.UserId == userId).ToList();
                 var games = new List<Game>();
 
-                foreach(var userGame in userGames)
+                var user = db.Users.SingleOrDefault(x => x.Email == userEmail);
+                if (user != null)
                 {
-                    var game = db.Games.SingleOrDefault(x => x.Id == userGame.GameId);
-                    games.Add(game);
+                    var userId = user.Id;
+
+                    var userGames = db.UserGames.Where(x => x.UserId == userId).ToList();
+
+
+                    foreach (var userGame in userGames)
+                    {
+                        var game = db.Games.SingleOrDefault(x => x.Id == userGame.GameId);
+                        games.Add(game);
+                    }
                 }
                 
                 return games;

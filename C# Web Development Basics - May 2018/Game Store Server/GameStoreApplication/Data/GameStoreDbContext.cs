@@ -29,14 +29,12 @@ namespace WebServer.GameStoreApplication.Data
             builder.Entity<UserGame>()
                 .HasOne(u => u.User)
                 .WithMany(ug => ug.UserGames)
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(u => u.UserId);
 
             builder.Entity<UserGame>()
                 .HasOne(g => g.Game)
                 .WithMany(ug => ug.UserGames)
-                .HasForeignKey(g => g.GameId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(g => g.GameId);
         }
     }
 }

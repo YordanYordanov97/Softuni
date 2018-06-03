@@ -148,7 +148,17 @@ namespace WebServer.GameStoreApplication.Controllers
 
         public IHttpResponse CartGet(IHttpRequest req)
         {
-            cart = req.Session.Get<Cart>(SessionStore.CurrentCartKey);
+            if (!req.Session.Contains(SessionStore.CurrentAdminKey) &&
+                    !req.Session.Contains(SessionStore.CurrentUserKey))
+            {
+                req.Session.Add(SessionStore.CurrentGuestKey, new Cart());
+                cart = req.Session.Get<Cart>(SessionStore.CurrentGuestKey);
+            }
+            else
+            {
+                cart = req.Session.Get<Cart>(SessionStore.CurrentCartKey);
+            }
+           
 
             var products = cart.GetAllProducts();
             

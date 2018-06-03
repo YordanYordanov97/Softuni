@@ -21,7 +21,7 @@ namespace WebServer.GameStoreApplication.Controllers
 
         public IHttpResponse Home(IHttpRequest req)
         {
-            return new ViewResponse(HttpStatusCode.Ok, new HtmlView(@"home\index", this.ViewData,req));
+            return new ViewResponse(HttpStatusCode.Ok, new HtmlView(@"home\layout", this.ViewData,req));
         }
 
         public IHttpResponse Info(IHttpRequest req)
