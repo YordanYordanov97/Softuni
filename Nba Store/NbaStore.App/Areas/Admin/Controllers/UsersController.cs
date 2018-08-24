@@ -34,6 +34,7 @@ namespace NbaStore.App.Areas.Admin.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [ValidationModel]
         public async Task<IActionResult> ChangePassword(string id,ChangePasswordBindingModel model)
         {

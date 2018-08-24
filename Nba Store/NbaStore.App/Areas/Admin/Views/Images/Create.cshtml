@@ -5,6 +5,7 @@
 
 <h2>Create Image</h2>
 <form method="post">
+    @Html.AntiForgeryToken()
     <div asp-validation-summary="All" class="text-danger"></div>
     @Html.FormGroupFor(model => model.Url)
     <div class="form-group">

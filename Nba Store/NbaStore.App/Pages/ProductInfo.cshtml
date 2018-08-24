@@ -37,6 +37,7 @@
             }
             <br />
             <form method="get">
+                @Html.AntiForgeryToken()
                 <span><strong>Quantity: </strong></span>
                 <a class="btn btn-default"
                    asp-page-handler="DecreaseCount" asp-route-id="@this.RouteData.Values["id"]">

@@ -14,6 +14,7 @@ using NbaStore.Services.Admin.Interfaces;
 
 namespace NbaStore.App.Pages
 {
+    [ValidateAntiForgeryToken]
     public class ProductInfoModel : PageModel
     {
         private readonly IAdminProductsService productsService;

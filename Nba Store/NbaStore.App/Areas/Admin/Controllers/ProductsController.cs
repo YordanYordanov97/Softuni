@@ -52,7 +52,7 @@ namespace NbaStore.App.Areas.Admin.Controllers
         }
         
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         [ValidationModel]
         public async Task<IActionResult> Create(ProductBindingModel model)
         {
@@ -72,7 +72,7 @@ namespace NbaStore.App.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         [ValidationModel]
         public async Task<IActionResult> Edit(int id, ProductBindingModel model)
         {

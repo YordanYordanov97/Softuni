@@ -11,6 +11,7 @@
 
 <h2>Create Team</h2>
 <form method="post">
+    @Html.AntiForgeryToken()
     <div asp-validation-summary="All" class="text-danger"></div>
     @Html.FormGroupFor(model => model.PictureUrl)
     @Html.FormGroupFor(model => model.Title)

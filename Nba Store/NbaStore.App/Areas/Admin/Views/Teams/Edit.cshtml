@@ -4,10 +4,11 @@
 }
 <h2>Edit @Model.Name</h2>
 <div class="row">
+    @Html.AntiForgeryToken()
     <div class="col-md-6">
         <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
             @Html.EditorForModel()
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <div class="col-sm-10 col-sm-push2">
                     <button type="submit" class="btn btn-warning">Edit</button>
