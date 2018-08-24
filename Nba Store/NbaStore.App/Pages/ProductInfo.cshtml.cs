@@ -14,7 +14,6 @@ using NbaStore.Services.Admin.Interfaces;
 
 namespace NbaStore.App.Pages
 {
-    [ValidateAntiForgeryToken]
     public class ProductInfoModel : PageModel
     {
         private readonly IAdminProductsService productsService;
@@ -46,7 +45,8 @@ namespace NbaStore.App.Pages
             this.productCountToBuy.Number = 1;
             this.ProductModel = await this.productsService.GetDetails(id);
         }
-
+         
+        [ValidateAntiForgeryToken]
         public async Task <IActionResult> OnPost(int id)
         {
             if (this.SizeId<=0 || this.SizeId>4)
