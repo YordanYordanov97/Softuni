@@ -1,4 +1,5 @@
-﻿using NbaStore.Models;
+﻿using NbaStore.Common.Constants;
+using NbaStore.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,7 @@ namespace NbaStore.Common.BindingModels.Admin.Products
     {
         [Required]
         [Url]
-        [Display(Name = "Picture Url")]
+        [Display(Name = ValidationConstants.PictureUrl)]
         public string PictureUrl { get; set; }
 
         [Required]
@@ -18,15 +19,15 @@ namespace NbaStore.Common.BindingModels.Admin.Products
         public string Title { get; set; }
 
         [Required]
-        [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",MinimumLength = 3)]
+        [StringLength(10, ErrorMessage = ValidationConstants.ErrorMessageForMinAndMaxLength, MinimumLength = 3)]
         public string Gender { get; set; }
 
         [Required]
-        [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",MinimumLength = 3)]
+        [StringLength(20, ErrorMessage = ValidationConstants.ErrorMessageForMinAndMaxLength, MinimumLength = 3)]
         public string Type { get; set; }
 
         [Required]
-        [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",MinimumLength = 2)]
+        [StringLength(30, ErrorMessage = ValidationConstants.ErrorMessageForMinAndMaxLength, MinimumLength = 2)]
         public string Brand { get; set; }
 
         [Required]
@@ -35,13 +36,13 @@ namespace NbaStore.Common.BindingModels.Admin.Products
 
         public string Size { get; set; }
 
-        [Range(typeof(decimal), "0.0", "79228162514264337593543950335")]
+        [Range(typeof(decimal), ValidationConstants.MinDecimal, ValidationConstants.MaxDecimal)]
         public decimal Discount { get; set; }
 
-        [Range(typeof(decimal), "0.0", "79228162514264337593543950335")]
+        [Range(typeof(decimal), ValidationConstants.MinDecimal, ValidationConstants.MaxDecimal)]
         public decimal Price { get; set; }
 
-        [Display(Name = "Team Name")]
+        [Display(Name = ValidationConstants.TeamName)]
         public int TeamId { get; set; }
 
         public List<Team> Teams { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NbaStore.Common.Constants;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -8,9 +9,9 @@ namespace NbaStore.Common.BindingModels.Admin.Users
     public class ChangePasswordBindingModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = ValidationConstants.ErrorMessageForMinAndMaxLength, MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New Password")]
+        [Display(Name = ValidationConstants.NewPassword)]
         public string NewPassword { get; set; }
     }
 }
