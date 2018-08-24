@@ -1,0 +1,25 @@
+﻿@model ProductDetailsViewModel
+@{
+    var parms = new Dictionary<string, string>();
+    parms["productId"] = Model.Id.ToString();
+}
+@if (Model.Images.Any())
+{
+    @foreach (var image in Model.Images)
+    {
+        parms["imageId"] = image.Id.ToString();
+        <div class="card col-4 thumbnail">
+            <img class="card-image-top img-fluid img-thumbnail"
+                 onerror="this.src='@image.Url'"
+                 src="@image.Url" height="200" width="200">
+            <a class="btn btn-warning"
+               asp-area="Admin" asp-controller="Images" asp-action="Edit" asp-all-route-data="parms">
+                Edit Image
+            </a>
+            <a class="btn btn-danger"
+               asp-area="Admin" asp-controller="Images" asp-action="Delete" asp-all-route-data="parms">
+                Delete Image
+            </a>
+        </div>
+    }
+}

@@ -1,0 +1,126 @@
+﻿@model PagesViewModel
+@{
+    var parms = new Dictionary<string, string>();
+    parms["id"] = Model.RouteId.ToString();
+}
+<ul class="nav nav-pills">
+    @if (Model.CurrentPage != 1)
+    {
+        parms["page"] = (Model.CurrentPage - 1).ToString();
+
+        <li class="nav-item">
+            <a class="nav-link" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+               asp-all-route-data="parms">
+                <i class="fas fa-angle-left"></i>
+            </a>
+        </li>
+    }
+    @if (Model.CurrentPage == 1)
+    {
+        parms["page"] = "1";
+
+        <li class="nav-item">
+            <a class="nav-link active" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+               asp-all-route-data="parms">
+                1
+            </a>
+        </li>
+    }
+    else
+    {
+        parms["page"] = "1";
+
+        <li class="nav-item">
+            <a class="nav-link" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+               asp-all-route-data="parms">
+                1
+            </a>
+        </li>
+    }
+    @if (Model.CurrentPage < 3)
+    {
+        if (Model.CurrentPage < Model.MaxPage)
+        {
+            parms["page"] = "2";
+            if (Model.CurrentPage == 2)
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+                       asp-all-route-data="parms">
+                        2
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+                       asp-all-route-data="parms">
+                        2
+                    </a>
+                </li>
+            }
+        }
+    }
+    else
+    {
+        if (Model.CurrentPage - 1 != 1)
+        {
+            if (Model.CurrentPage > 3)
+            {
+                <li class="nav-item">
+                    ...
+                </li>
+            }
+        }
+        parms["page"] = (Model.CurrentPage - 1).ToString();
+        <li class="nav-item">
+            <a class="nav-link" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+               asp-all-route-data="parms">@(Model.CurrentPage - 1)</a>
+        </li>
+        parms["page"] = Model.CurrentPage.ToString();
+        <li class="nav-item">
+            <a class="nav-link active" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+               asp-all-route-data="parms">
+                @Model.CurrentPage
+            </a>
+        </li>
+        parms["page"] = (Model.CurrentPage + 1).ToString();
+        if (Model.CurrentPage + 1 < Model.MaxPage)
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+                   asp-all-route-data="parms">
+                    @(Model.CurrentPage + 1)
+                </a>
+            </li>
+            if (Model.CurrentPage + 2 != Model.MaxPage)
+            {
+                <li class="nav-item">
+                    ...
+                </li>
+            }
+        }
+    }
+    @if (Model.MaxPage > 2)
+    {
+        @if (Model.CurrentPage != Model.MaxPage)
+        {
+            parms["page"] = Model.MaxPage.ToString();
+            <li class="nav-item">
+                <a class="nav-link" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+                   asp-all-route-data="parms">
+                    @Model.MaxPage
+                </a>
+            </li>
+            parms["page"] = (Model.CurrentPage + 1).ToString();
+            <li class="nav-item">
+                <a class="nav-link" asp-area="@Model.AreaName" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName"
+                   asp-all-route-data="parms">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </li>
+        }
+    }
+
+</ul>

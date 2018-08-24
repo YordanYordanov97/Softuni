@@ -1,0 +1,24 @@
+﻿@model OrderProductsViewModel
+
+<div class="list-group">
+    <div class="list-group-item">
+        <div class="media">
+            <div class="media-body align-self-center">
+                <img class="@Model.ProductPicture" height="127" src="@Model.ProductPicture"
+                     width="227" alt="Generic placeholder image">
+            </div>
+            <div class="media-body align-self-center">
+                <h4 class="mb-1 list-group-item-heading"> @Model.ProductTitle </h4>
+            </div>
+            <div class="media-body align-self-center">
+                <h4 class="mb-1 list-group-item-heading">Price: @Model.ProductPrice &euro; </h4>
+            </div>
+            <div class="media-body align-self-center">
+                <h4 class="mb-1 list-group-item-heading">Size: @Model.ProductSize</h4>
+            </div>
+            <div class="media-body align-self-center">
+                <h4 class="mb-1 list-group-item-heading">Quantity: @Model.Quantity</h4>
+            </div>
+        </div>
+    </div>
+</div>

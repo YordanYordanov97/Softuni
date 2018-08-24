@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Ban";
+}
+
+<h3>Are you sure that to ban this account?</h3>
+<a class="btn btn-danger"
+   asp-area="Admin" asp-controller="Users" asp-action="ConfirmBan" asp-route-id="@ViewData["UserId"]">
+    Yes
+</a>
+<a class="btn btn-default"
+   asp-area="Admin" asp-controller="Users" asp-action="Index">
+    No
+</a>
+

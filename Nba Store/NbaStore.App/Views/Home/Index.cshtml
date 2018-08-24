@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<br />
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="https://clutchpoints.com/wp-content/uploads/2018/04/n9.jpg" alt="First slide">
+            <div class="carousel-caption d-none d-md-block col-sm-12 col-sm-push12">
+                <a class="btn btn-warning btn-lg" style="padding:15px;margin:15px"
+                   asp-area="" asp-controller="Mens" asp-action="Index">
+                    Shop Now
+                </a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100"
+                 src="https://cms-bucket.nosdn.127.net/06bffc50c6e647d3b26d0602179689b320171028155459.jpeg" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block col-sm-12 col-sm-push12">
+                <a class="btn btn-warning btn-lg"  style="padding:15px;margin:15px"
+                   asp-area="" asp-controller="Mens" asp-action="Index">
+                    Shop Now
+                </a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="https://mk0slamonlinensgt39k.kinstacdn.com/wp-content/uploads/2017/10/anthony_davis_main.jpg" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block col-sm-12 col-sm-push12">
+                <a class="btn btn-warning btn-lg"  style="padding:15px;margin:15px"
+                   asp-area="" asp-controller="Mens" asp-action="Index">
+                    Shop Now
+                </a>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span  class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+        <span  class="sr-only bg-info">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+        <span class="sr-only bg-info">Next</span>
+    </a>
+</div>

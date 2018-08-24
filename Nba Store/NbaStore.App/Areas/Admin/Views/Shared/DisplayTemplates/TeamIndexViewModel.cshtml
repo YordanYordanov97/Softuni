@@ -1,0 +1,32 @@
+﻿@model TeamIndexViewModel
+
+<tr>
+    <td>@Model.Id</td>
+    <th><img src="@Model.LogoUrl" alt="@Model.Name" width="50" height="50"/></th>
+    <th>@Model.Name</th>
+    @{
+        if (Model.ProductsCount==0)
+        {
+            <th>No products</th>
+        }
+        else
+        {
+            <th>@Model.ProductsCount</th>
+        }
+    }
+
+    <th>
+        <a class="btn btn-info"
+           asp-area="Admin" asp-controller="Teams" asp-action="Details" asp-route-id="@Model.Id">
+            Details
+        </a>
+        <a class="btn btn-warning"
+           asp-area="Admin" asp-controller="Teams" asp-action="Edit" asp-route-id="@Model.Id">
+           Edit
+        </a>
+        <a class="btn btn-danger"
+           asp-area="Admin" asp-controller="Teams" asp-action="Delete" asp-route-id="@Model.Id">
+            Delete
+        </a>
+    </th>
+</tr>

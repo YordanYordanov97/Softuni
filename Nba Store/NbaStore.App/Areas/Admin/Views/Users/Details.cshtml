@@ -1,0 +1,31 @@
+﻿@model UserDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>User: @Model.Username</h2>
+<p>Full Name: <strong>@Model.FullName</strong></p>
+<p>Email: <strong>@Model.Email</strong></p>
+<p>Date Of Registration: <strong>@Model.DateOfRegistration</strong></p>
+@{
+    if (Model.Orders.Any())
+    {
+        <p>Orders Count: <strong>@Model.Orders.Count</strong></p>
+    }
+    else
+    {
+        <p>No orders</p>
+    }
+}
+
+@foreach (var order in Model.Orders)
+{
+    <ul>
+        <li>
+            <a asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">
+                Order Id : @order.Id
+            </a>
+        </li>
+    </ul>
+}
+

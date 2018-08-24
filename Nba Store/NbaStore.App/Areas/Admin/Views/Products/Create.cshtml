@@ -1,0 +1,49 @@
+﻿@model ProductBindingModel
+@{
+    var teams = Model.Teams as IEnumerable<Team>;
+    IEnumerable<SelectListItem> teamsSelectList = null;
+    if (teams != null)
+    {
+        teamsSelectList = teams.Select(t => new SelectListItem() { Text = t.Name, Value = t.Id.ToString() });
+    }
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create Team</h2>
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @Html.FormGroupFor(model => model.PictureUrl)
+    @Html.FormGroupFor(model => model.Title)
+    @Html.FormGroupFor(model => model.Type)
+    @Html.FormGroupFor(model => model.Brand)
+    @Html.FormGroupFor(model => model.Gender)
+    @Html.FormGroupFor(model => model.Price)
+    @Html.FormGroupFor(model => model.Discount)
+    <div class="form-group">
+        <label asp-for="Description" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <textarea class="form-control" asp-for="Description" rows="12"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-grop">
+        <label asp-for="TeamId" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <select asp-for="TeamId" asp-items="teamsSelectList" class="form-control"></select>
+            <span asp-validation-for="TeamId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-push2">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a class="btn btn-default"
+               asp-area="Admin" asp-controller="Products" asp-action="Index">
+                Back
+            </a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

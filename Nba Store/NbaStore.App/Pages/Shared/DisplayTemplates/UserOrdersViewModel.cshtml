@@ -1,0 +1,14 @@
+﻿@model UserOrdersViewModel
+
+<tr>
+    <td>@Model.Id</td>
+    <th>@Model.DateOfOrdering</th>
+    <th>@Model.TotalPrice</th>
+    <th>@Model.OrderProductsCount</th>
+    <th>
+        <a class="btn btn-warning"
+           asp-area="" asp-page="/Orders/Details" asp-route-id="@Model.Id">
+            Details
+        </a>
+    </th>
+</tr>

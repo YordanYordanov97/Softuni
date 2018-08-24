@@ -1,0 +1,120 @@
+﻿@model BrandsProductsViewModel
+@{
+    var brandsSelectedModel = Model.Brands.Where(x => x.IsChecked == true)
+        .Select(x => x.Name)
+        .ToList();
+    var pageToAction = "1";
+}
+
+<ul class="nav nav-pills">
+    @if (Model.Page.CurrentPage != 1)
+    {
+        pageToAction = (Model.Page.CurrentPage - 1).ToString();
+        <li class="nav-item">
+            <a class="nav-link" href='@Url.Action($"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+   new {brands= brandsSelectedModel,gender=Model.Gender,page=pageToAction })'>
+                <i class="fas fa-angle-left"></i>
+            </a>
+        </li>
+    }
+    @if (Model.Page.CurrentPage == 1)
+    {
+        <li class="nav-item">
+            @Html.ActionLink("1",$"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+        new {brands= brandsSelectedModel,gender=Model.Gender,page=pageToAction },
+        new { @class = "nav-link active"})
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            @Html.ActionLink("1",$"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+        new {brands= brandsSelectedModel,gender=Model.Gender,page=pageToAction },
+        new { @class = "nav-link"})
+        </li>
+
+    }
+    @if (Model.Page.CurrentPage < 3)
+    {
+        if (Model.Page.CurrentPage < Model.Page.MaxPage)
+        {
+            pageToAction = 2.ToString();
+            if (Model.Page.CurrentPage == 2)
+            {
+                <li class="nav-item">
+                    @Html.ActionLink(pageToAction,$"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+                new {brands= brandsSelectedModel,gender=Model.Gender,page=pageToAction },
+                new { @class = "nav-link active" })
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    @Html.ActionLink(pageToAction,$"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+                new {brands= brandsSelectedModel,gender=Model.Gender,page=pageToAction },
+                new { @class = "nav-link" })
+                </li>
+            }
+
+        }
+    }
+    else
+    {
+        if (Model.Page.CurrentPage - 1 != 1)
+        {
+            if (Model.Page.CurrentPage > 3)
+            {
+                <li class="nav-item">
+                    ...
+                </li>
+            }
+        }
+        pageToAction = (Model.Page.CurrentPage - 1).ToString();
+        <li class="nav-item">
+            @Html.ActionLink(pageToAction,$"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+        new {brands= brandsSelectedModel,gender=Model.Gender,page=pageToAction },
+        new { @class = "nav-link" })
+        </li>
+        pageToAction = Model.Page.CurrentPage.ToString();
+        <li class="nav-item">
+            @Html.ActionLink(pageToAction,$"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+                new {brands= brandsSelectedModel,gender=Model.Gender,page=pageToAction },
+                new { @class = "nav-link active" })
+        </li>
+
+        if (Model.Page.CurrentPage + 1 < Model.Page.MaxPage)
+        {
+            pageToAction = (Model.Page.CurrentPage + 1).ToString();
+            <li class="nav-item">
+                @Html.ActionLink(pageToAction,$"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+                         new {brands= brandsSelectedModel,gender=Model.Gender,page=pageToAction },
+                         new { @class = "nav-link" })
+            </li>
+            if (Model.Page.CurrentPage + 2 != Model.Page.MaxPage)
+            {
+                <li class="nav-item">
+                    ...
+                </li>
+            }
+        }
+    }
+    @if (Model.Page.MaxPage > 2)
+    {
+        @if (Model.Page.CurrentPage != Model.Page.MaxPage)
+        {
+            pageToAction = Model.Page.MaxPage.ToString();
+            <li class="nav-item">
+                @Html.ActionLink(pageToAction, $"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+                             new { brands = brandsSelectedModel, gender = Model.Gender, page = pageToAction },
+                             new { @class = "nav-link" })
+            </li>
+            pageToAction = (Model.Page.CurrentPage + 1).ToString();
+            <li class="nav-item">
+                <a class="nav-link" href='@Url.Action($"{Model.Page.ActionName}", $"{Model.Page.ControllerName}",
+new { brands = brandsSelectedModel, gender = Model.Gender, page = pageToAction })'>
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </li>
+        }
+    }
+</ul>

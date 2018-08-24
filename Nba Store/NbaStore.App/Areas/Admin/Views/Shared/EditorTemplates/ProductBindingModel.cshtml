@@ -1,0 +1,17 @@
+﻿@model ProductBindingModel
+
+@Html.FormGroupFor(model => model.PictureUrl)
+@Html.FormGroupFor(model => model.Title)
+@Html.FormGroupFor(model => model.Type)
+@Html.FormGroupFor(model => model.Brand)
+@Html.FormGroupFor(model => model.Gender)
+@Html.FormGroupFor(model => model.Price)
+@Html.FormGroupFor(model => model.Discount)
+
+<div class="form-group">
+    <label asp-for="Description" class="col-sm-2"></label>
+    <div class="col-sm-10">
+        @Html.TextAreaFor(model => model.Description,new { rows="12", style = "width: 100%; height: 100px;" })
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+</div>

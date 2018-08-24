@@ -1,0 +1,10 @@
+﻿@page "{id:int}"
+@model NbaStore.App.Pages.Orders.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details for Order @this.RouteData.Values["id"]</h2>
+<br />
+@Html.DisplayFor(x => x.ViewModel)
+

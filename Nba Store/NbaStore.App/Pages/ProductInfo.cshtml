@@ -1,0 +1,77 @@
+﻿@page "{id:int}.{handler?}"
+@model NbaStore.App.Pages.ProductInfoModel
+@{
+    var newPrice = Math.Round(Model.ProductModel.Price - ((Model.ProductModel.Price * Model.ProductModel.Discount) / 100), 2);
+
+    ViewData["Title"] = "ProductInfo";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <img class="card-image-top img-fluid img-thumbnail"
+                 onerror="this.src='@Model.ProductModel.PictureUrl'"
+                 src="@Model.ProductModel.PictureUrl" height="500" width="500">
+            <br />
+            <br />
+            <br />
+            @foreach (var image in Model.ProductModel.Images)
+            {
+                <img class="card-image-top img-fluid img-thumbnail"
+                     onerror="this.src='@image.Url'"
+                     src="@image.Url" height="250" width="250">
+
+            }
+        </div>
+        <div class="col-sm-6">
+            <h3>@Model.ProductModel.Title</h3>
+            <hr />
+            @if (Model.ProductModel.Discount > 0)
+            {
+                <p class="card-text"><strong>Discount</strong> - @Model.ProductModel.Discount%</p>
+                <p class="card-text"><strong>Price</strong> - <span style="color:red">@newPrice &euro;</span> <strike>@Model.ProductModel.Price &euro;</strike></p>
+            }
+            else
+            {
+                <p class="card-text"><strong>Price</strong> - @Model.ProductModel.Price &euro;</p>
+            }
+            <br />
+            <form method="get">
+                <span><strong>Quantity: </strong></span>
+                <a class="btn btn-default"
+                   asp-page-handler="DecreaseCount" asp-route-id="@this.RouteData.Values["id"]">
+                    <i style="font-size: 23px;" class="fas fa-minus"></i>
+                </a>
+                <label> @Model.Quantity </label>
+                <a class="btn btn-default" asp-page-handler="IncreaseCount" asp-route-id="@this.RouteData.Values["id"]">
+                    <i style="font-size: 23px;" class="fas fa-plus"></i>
+                </a>
+            </form>
+            <br />
+            <form method="post">
+                <label class="label">Select Size</label>
+                <div class="col-md-10">
+                    @foreach (var item in Model.SelectSizes)
+                    {
+                        <input asp-for="SizeId" type="radio" value="@item.Key" /> @item.Value
+                    }
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <br />
+                <button type="submit" class="btn btn-danger">Add To Chart</button>
+            </form>
+            <hr />
+            <br />
+            <br />
+            <p><strong>Description</strong></p>
+            <p><strong>Team - </strong>@Model.ProductModel.Team.Name</p>
+            <p><strong>Brand - </strong>@Model.ProductModel.Brand</p>
+            <p><strong>Gender - </strong>@Model.ProductModel.Gender</p>
+            <p><strong>Type - </strong>@Model.ProductModel.Type</p>
+            <br />
+            <p>@Model.ProductModel.Description</p>
+        </div>
+    </div>
+</div>
+
+

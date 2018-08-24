@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ProductIndexViewModel>
+@{
+    var pagesViewModel = new PagesViewModel()
+    {
+        CurrentPage = (int)ViewData["CurrentPage"],
+        MaxPage = (int)ViewData["PagesCount"],
+        AreaName = "Admin",
+        ControllerName ="Products",
+        ActionName = "Index",
+
+    };
+    ViewData["Title"] = "Index";
+}
+
+<h2>All Products</h2>
+<a asp-area="Admin" asp-controller="Products" asp-action="Create" class="btn btn-success">
+    <i class="fa fa-plus"></i> Create new product
+</a>
+<br />
+<div class="container">
+    <div class="row">
+        @await Html.PartialAsync("_ProductsViewPartial", Model)
+    </div>
+</div>
+<br />
+@await Html.PartialAsync("_NavPartial", pagesViewModel)

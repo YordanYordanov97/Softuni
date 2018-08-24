@@ -1,0 +1,14 @@
+﻿@model IEnumerable<ProductIndexViewModel>
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h2>Search results: "<span class="text-primary">@this.ViewData["SearchResult"]</span>"</h2>
+
+<br />
+<div class="container">
+    <div class="row">
+        @await Html.PartialAsync("_ProductsViewPartial", Model)
+    </div>
+</div>
+

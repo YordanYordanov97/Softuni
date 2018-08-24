@@ -1,0 +1,24 @@
+﻿@model IEnumerable<AllBrandsViewModel>
+
+@foreach (var brand in Model)
+{
+    <div class="form-group">
+        @if (brand.IsChecked)
+        {
+            <input type="checkbox" id="@brand.Id"
+                   value="@brand.Name" name="brands" checked>
+        }
+        else
+        {
+
+            <input type="checkbox" id="@brand.Id"
+                   value="@brand.Name" name="brands">
+        }
+        <label>@brand.Name</label>
+
+    </div>
+}
+
+<div class="form-group">
+    <button type="submit" class="btn btn-primary">Select</button>
+</div>

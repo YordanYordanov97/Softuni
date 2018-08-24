@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Team>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select Team
+    </button>
+    <div class="dropdown-menu">
+        @foreach (var team in Model)
+        {
+            <a class="dropdown-item" asp-area="" asp-controller="@this.ViewData["ControllerName"]" asp-action="Index" asp-route-id="@team.Id">
+                @team.Name 
+                <img src="@team.LogoUrl" alt="@team.Name" width="30" height="30" />
+            </a>
+        }
+    </div>
+</div>

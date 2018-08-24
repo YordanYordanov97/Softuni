@@ -1,0 +1,21 @@
+﻿@{
+    var parms = new Dictionary<string, string>();
+    parms["productId"] = ViewData["ProductId"].ToString();
+    parms["imageId"] = @ViewData["ImageId"].ToString();
+}
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Are you sure that to delete this image?</h3>
+<a class="btn btn-danger"
+   asp-area="Admin" asp-controller="Images" asp-action="ConfirmDelete" asp-all-route-data="parms">
+    Yes
+</a>
+<a class="btn btn-default"
+   asp-area="Admin" asp-controller="Products" asp-action="Details" asp-route-id="@ViewData["ProductId"]">
+    No
+</a>
+
+
+

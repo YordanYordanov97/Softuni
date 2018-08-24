@@ -1,0 +1,27 @@
+﻿@model PagesViewModel
+<div class="dropdown show">
+    <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       Sort By
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" asp-area="" asp-controller="@Model.ControllerName" asp-action="Index" asp-route-id="@Model.RouteId">
+          Newest Items
+        </a>
+        <a class="dropdown-item" asp-area="" asp-controller="@Model.ControllerName" asp-action="TopSellers" asp-route-id="@Model.RouteId">
+            Top Sellers
+        </a>
+        <a class="dropdown-item" asp-area="" asp-controller="@Model.ControllerName" asp-action="PriceHighLow" asp-route-id="@Model.RouteId">
+            Price high-low
+        </a>
+        <a class="dropdown-item" asp-area="" asp-controller="@Model.ControllerName" asp-action="PriceLowHigh" asp-route-id="@Model.RouteId">
+            Price low-high
+        </a>
+        <a class="dropdown-item" asp-area="" asp-controller="@Model.ControllerName" asp-action="DiscountHighLow" asp-route-id="@Model.RouteId">
+            Discount high-low %
+        </a>
+        <a class="dropdown-item" asp-area="" asp-controller="@Model.ControllerName" asp-action="DiscountLowHigh" asp-route-id="@Model.RouteId">
+            Discount low-high %
+        </a>
+    </div>
+</div>

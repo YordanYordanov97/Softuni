@@ -1,0 +1,28 @@
+﻿@model TeamDetailsViewModel
+@{
+    var pagesViewModel = new PagesViewModel()
+    {
+        CurrentPage = (int)ViewData["CurrentPage"],
+        MaxPage = (int)ViewData["PagesCount"],
+        AreaName="Admin",
+        ControllerName = "Teams",
+        ActionName="Details",
+        RouteId= (int)ViewData["RouteId"]
+    };
+    ViewData["Title"] = "Details";
+}
+
+<main>
+    <div class="container">
+        <div class="row">
+            <h2>@Model.Name</h2>
+            <br />
+            <div><img src="@Model.LogoUrl" alt="@Model.Name" width="150" height="150" /></div>
+            @await Html.PartialAsync("_ProductsViewPartial", Model.Products)
+        </div>
+    </div>
+    <br />
+    @await Html.PartialAsync("_NavTeamDetailsPartial", pagesViewModel)
+</main>
+
+

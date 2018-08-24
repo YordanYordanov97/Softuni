@@ -1,0 +1,33 @@
+﻿@model BrandsProductsViewModel
+@{
+    var brandsSelectedModel = Model.Brands.Where(x => x.IsChecked == true)
+        .Select(x => x.Name)
+        .ToList();
+}
+
+<div class="dropdown show">
+    <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort By
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        @Html.ActionLink("Newest Items","Index", $"{Model.Page.ControllerName}",
+new {brands= brandsSelectedModel,gender=Model.Gender,page=1 },
+new { @class = "dropdown-item" })
+        @Html.ActionLink("Top Sellers","TopSellers", $"{Model.Page.ControllerName}",
+  new {brands= brandsSelectedModel,gender=Model.Gender,page=1 },
+   new { @class = "dropdown-item" })
+        @Html.ActionLink("Price high-low", "PriceHighLow", $"{Model.Page.ControllerName}",
+ new {brands= brandsSelectedModel,gender=Model.Gender,page=1 },
+  new { @class = "dropdown-item" })
+        @Html.ActionLink("Price low-high", "PriceLowHigh", $"{Model.Page.ControllerName}",
+ new {brands= brandsSelectedModel,gender=Model.Gender,page=1 },
+  new { @class = "dropdown-item" })
+        @Html.ActionLink("Discount high-low %", "DiscountHighLow", $"{Model.Page.ControllerName}",
+ new {brands= brandsSelectedModel,gender=Model.Gender,page=1 },
+  new { @class = "dropdown-item" })
+        @Html.ActionLink("Discount low-high %", "DiscountLowHigh", $"{Model.Page.ControllerName}",
+ new {brands= brandsSelectedModel,gender=Model.Gender,page=1 },
+  new { @class = "dropdown-item" })
+    </div>
+</div>

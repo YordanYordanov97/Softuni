@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Are you sure that to delete this product?</h3>
+<a class="btn btn-danger"
+   asp-area="Admin" asp-controller="Products" asp-action="ConfirmDelete" asp-route-id="@ViewData["ProductId"]">
+    Yes
+</a>
+<a class="btn btn-default"
+   asp-area="Admin" asp-controller="Products" asp-action="Index">
+    No
+</a>
+

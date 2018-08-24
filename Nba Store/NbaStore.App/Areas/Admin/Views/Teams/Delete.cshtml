@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Are you sure that to delete this team?</h3>
+<a class="btn btn-danger"
+   asp-area="Admin" asp-controller="Teams" asp-action="ConfirmDelete" asp-route-id="@ViewData["TeamId"]">
+    Yes
+</a>
+<a class="btn btn-default"
+   asp-area="Admin" asp-controller="Teams" asp-action="Index">
+    No
+</a>
+
+

@@ -1,0 +1,23 @@
+﻿@page
+@model NbaStore.App.Pages.Orders.MyOrdersModel
+@{
+    ViewData["Title"] = "MyOrders";
+}
+
+<h2>My Orders</h2>
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-info">
+        <tr class="table-info">
+            <th scope="col">#</th>
+            <th scope="col">Date Of Ordering</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Products Count</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.DisplayFor(x=>x.ViewModel)
+    </tbody>
+</table>
+
