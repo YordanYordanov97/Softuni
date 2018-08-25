@@ -45,7 +45,7 @@ namespace NbaStore.App.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public IActionResult FinishOrder()
         {
             var shoppingCartId = this.GetStoppingCartId();
